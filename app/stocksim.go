@@ -1,5 +1,7 @@
 package app
 
+import "sort"
+
 type Order struct {
 	ID       string  `json:"id"`
 	Symbol   string  `json:"symbol"`
@@ -10,11 +12,23 @@ type Order struct {
 var buyerList []Order
 var sellerList []Order
 
+func SortAndAppend(List []Order, CurOrder Order, IsBuy bool) []Order {
+	List = append(List, CurOrder)
+	sort.SliceStable(List, func(i, j int) bool {
+		if IsBuy {
+			return List[i].Price > List[j].Price
+		} else {
+			return List[i].Price < List[j].Price
+		}
+	})
+	return List
+}
+
 func AddOrder(order Order, IsBuy bool) {
 	if IsBuy {
-		buyerList = append(buyerList, order)
+		buyerList = SortAndAppend(buyerList, order, IsBuy)
 	} else {
-		sellerList = append(sellerList, order)
+		sellerList = SortAndAppend(sellerList, order, IsBuy)
 	}
 }
 
