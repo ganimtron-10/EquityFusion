@@ -6,12 +6,7 @@ import (
 
 	"github.com/ganimtron-10/EquityFusion/app"
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 )
-
-type User struct {
-	ID string `json:"session_id"`
-}
 
 type ErrorResponse struct {
 	StatusCode int    `json:"status_code"`
@@ -23,7 +18,7 @@ func checkHealth(context *gin.Context) {
 }
 
 func RegisterUser(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, User{ID: uuid.NewString()})
+	context.IndentedJSON(http.StatusOK, app.RegisterUser())
 }
 
 func GetSellOrders(context *gin.Context) {
