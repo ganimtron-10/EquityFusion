@@ -14,6 +14,8 @@ func CreateAndInitServer(port string) {
 	router.GET("/register", RegisterUser)
 	router.GET("/sell", GetSellOrders)
 	router.GET("/buy", GetBuyOrders)
+	router.GET("/seed", SeedDummyOrders)
+	router.GET("/tradebook", GetTradebook)
 
 	router.POST("/sell", AddSellOrder)
 	router.POST("/buy", AddBuyOrder)
