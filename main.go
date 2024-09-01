@@ -1,11 +1,17 @@
 package main
 
 import (
-	"github.com/ganimtron-10/EquityFusion/api"
-	// "github.com/ganimtron-10/EquityFusion/cmd"
+	"github.com/ganimtron-10/EquityFusion/cmd"
 )
 
 func main() {
-	// cmd.Execute()
-	api.CreateAndInitServer("8080")
+	cmd.Execute()
 }
+
+// import (
+// 	"github.com/ganimtron-10/EquityFusion/api"
+// )
+
+// func main() {
+// 	api.CreateAndInitServer("8080")
+// }

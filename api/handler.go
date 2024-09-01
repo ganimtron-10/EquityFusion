@@ -79,6 +79,5 @@ func SeedDummyOrders(context *gin.Context) {
 }
 
 func GetTradebook(context *gin.Context) {
-	app.PrintTradeBook()
-	context.JSON(http.StatusOK, nil)
+	context.JSON(http.StatusOK, app.ReturnTradeBook())
 }
