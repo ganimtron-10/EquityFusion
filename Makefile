@@ -2,4 +2,4 @@ run:
 	go run main.go
 
 build:
-	go build main.go
+	go build -o ef main.go
