@@ -51,8 +51,8 @@ EquityFusion is a Go-based RESTful API cum CLI application designed to simulate 
     | GET | `/sell` | Retrieves a list of all sell orders. | - | - | (Deprecated, use POST for creating orders)
     | GET | `/buy` | Retrieves a list of all buy orders. | - | - | (Deprecated, use POST for creating orders)
     | GET | `/seed` | Seeds the system with dummy orders for testing. | - | `?number=<number_of_orders>` |
-    | GET | `/tradebook` | Retrieves the tradebook for a specific stock symbol. | - | `?symbol=<stock_symbol>` |
-    | GET | `/portfolio` | Retrieves your portfolio information. | - | `?userId=<user_id>` |
+    | GET | `/tradebook` | Retrieves the tradebook for a specific user. | - | - |
+    | GET | `/portfolio` | Retrieves portfolio information for specific user. | - | `?userId=<user_id>` |
     | POST | `/sell` | Creates a new sell order. | `{ "id": "user_id", "symbol": "stock_symbol", "quantity": <quantity>, "price": <price> }` | - |
     | POST | `/buy` | Creates a new buy order. | `{ "id": "user_id", "symbol": "stock_symbol", "quantity": <quantity>, "price": <price> }` | - |
 
@@ -60,9 +60,9 @@ EquityFusion is a Go-based RESTful API cum CLI application designed to simulate 
     **CLI Commands:**
 
     * **`ef register`:** Register a new user and obtain a token.
-    * **`ef order -b <buy/sell> -s <symbol> -q <quantity> -p <price>`:** Create a buy or sell order. (**Deprecated, use POST requests for creating orders**)
-    * **`ef portfolio -i <user_id>`:** View your portfolio details.
-    * **`ef tradebook -s <symbol>`:** View your trade history for a specific stock.
+    * **`ef order -i <user_id> -s <symbol> -q <quantity> -p <price> -b <buy order>`:** Create a buy or sell order.
+    * **`ef portfolio -i <user_id>`:** View portfolio details for a specific user.
+    * **`ef tradebook`:** View trade history for a specific user.
     * **`ef seed -n <number>`:** Seed the system with dummy orders for testing.
     * **`ef expose -p <port>`:** Expose the RESTful API on the specified port.
 
