@@ -55,3 +55,14 @@ func GetAllOrders(IsBuy bool) []Order {
 		return sellerList
 	}
 }
+
+func getPendingOrdersByUserId(userId string, isBuy bool) []Order {
+	OrderList := GetAllOrders(isBuy)
+	PendingOrderList := []Order{}
+	for _, order := range OrderList {
+		if order.ID == userId {
+			PendingOrderList = append(PendingOrderList, order)
+		}
+	}
+	return PendingOrderList
+}

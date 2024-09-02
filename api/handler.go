@@ -81,3 +81,13 @@ func SeedDummyOrders(context *gin.Context) {
 func GetTradebook(context *gin.Context) {
 	context.JSON(http.StatusOK, app.ReturnTradeBook())
 }
+
+func GetPortfolio(context *gin.Context) {
+	var userId string
+
+	if context.Query("userId") != "" {
+		userId = context.Query("userId")
+	}
+
+	context.JSON(http.StatusOK, app.ReturnPortfolio(userId))
+}

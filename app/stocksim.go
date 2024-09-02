@@ -24,12 +24,18 @@ var Green = "\033[32m"
 // Also add necessary locks to make sure async functions are working fine
 
 func LogTrade(BuyOrder, SellOrder Order) {
-	// TODO: Store Transaction as Object instead of Logs for easier JSON response
 
 	tradeQuantity := min(BuyOrder.Quantity, SellOrder.Quantity)
 	tradelog := TradeLog{BuyUserID: BuyOrder.ID, SellUserID: SellOrder.ID, Symbol: BuyOrder.Symbol, Quantity: tradeQuantity, BuyPrice: BuyOrder.Price, SellPrice: SellOrder.Price}
 
+	AddHolding(BuyOrder.ID, tradelog)
 	tradebook = append(tradebook, tradelog)
+}
+
+func PrintTradeLog(log TradeLog, srnum int) {
+
+	fmt.Printf("|%10v|%10v|%10v|%10v|%10.5f|\n", srnum, log.BuyUserID, log.Symbol, log.Quantity, log.BuyPrice)
+	fmt.Printf("|%10v|%10v|%10v|%10v|%10.5f|\n", "", log.SellUserID, log.Symbol, log.Quantity, log.SellPrice)
 
 }
 
@@ -59,9 +65,7 @@ func PrintTradeBook() {
 
 	fmt.Printf("|%10v|%10v|%10v|%10v|%10v|", "Sr No.", "UserID", "Symbol", "Quantity", "Price")
 	for _, log := range tradebook {
-		fmt.Printf("|%10v|%10v|%10v|%10v|%10.5f|", len(tradebook)/2+1, log.BuyUserID, log.Symbol, log.Quantity, log.BuyPrice)
-
-		fmt.Printf("|%10v|%10v|%10v|%10v|%10.5f|", "", log.SellUserID, log.Symbol, log.Quantity, log.SellPrice)
+		PrintTradeLog(log, len(tradebook)/2+1)
 	}
 }
 

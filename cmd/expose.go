@@ -18,5 +18,5 @@ var exposeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(exposeCmd)
-	exposeCmd.Flags().StringVarP(&Port, "port", "p", "8000", "port exposing the RESTful API")
+	exposeCmd.Flags().StringVarP(&Port, "port", "p", "8080", "port exposing the RESTful API")
 }
