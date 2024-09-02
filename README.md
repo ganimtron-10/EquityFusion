@@ -1,6 +1,6 @@
 # EquityFusion
 
-EquityFusion is a Go-based RESTful API application designed to simulate the workings of a stock market. This project provides a backend system where users can register, buy, and sell stocks using tokens, with orders processed through a simulated stock exchange.
+EquityFusion is a Go-based RESTful API cum CLI application designed to simulate the workings of a stock market. This project provides a backend system where users can register, buy, and sell stocks using tokens, with orders processed through a simulated stock exchange.
 
 ## Features
 
@@ -23,6 +23,8 @@ EquityFusion is a Go-based RESTful API application designed to simulate the work
   
 - **Tech Stack:**
   - Go (Golang)
+  - Gin Web Framework
+  - CobraCli
   
 ## Setup and Usage
 
@@ -34,14 +36,37 @@ EquityFusion is a Go-based RESTful API application designed to simulate the work
 
 2. **Build and Run Locally:**
    ```bash
-   go build
-   ./EquityFusion
+   make build
+   ./ef
    ```
    
-3. **API Documentation:**
-   - Detailed API documentation and usage examples are provided in the source code.
+3. **Usecase Options**
 
-4. **Docker Deployment:**
+   **API Endpoints:**
+
+    | Method | URL | Description | JSON Body (POST) | Query Parameters (GET) |
+    |---|---|---|---|---|
+    | GET | `/health` | Checks the health of the API. | - | - |
+    | GET | `/register` | Registers a new user and returns a token. | - | - |
+    | GET | `/sell` | Retrieves a list of all sell orders. | - | - | (Deprecated, use POST for creating orders)
+    | GET | `/buy` | Retrieves a list of all buy orders. | - | - | (Deprecated, use POST for creating orders)
+    | GET | `/seed` | Seeds the system with dummy orders for testing. | - | `?number=<number_of_orders>` |
+    | GET | `/tradebook` | Retrieves the tradebook for a specific stock symbol. | - | `?symbol=<stock_symbol>` |
+    | GET | `/portfolio` | Retrieves your portfolio information. | - | `?userId=<user_id>` |
+    | POST | `/sell` | Creates a new sell order. | `{ "id": "user_id", "symbol": "stock_symbol", "quantity": <quantity>, "price": <price> }` | - |
+    | POST | `/buy` | Creates a new buy order. | `{ "id": "user_id", "symbol": "stock_symbol", "quantity": <quantity>, "price": <price> }` | - |
+
+
+    **CLI Commands:**
+
+    * **`ef register`:** Register a new user and obtain a token.
+    * **`ef order -b <buy/sell> -s <symbol> -q <quantity> -p <price>`:** Create a buy or sell order. (**Deprecated, use POST requests for creating orders**)
+    * **`ef portfolio -i <user_id>`:** View your portfolio details.
+    * **`ef tradebook -s <symbol>`:** View your trade history for a specific stock.
+    * **`ef seed -n <number>`:** Seed the system with dummy orders for testing.
+    * **`ef expose -p <port>`:** Expose the RESTful API on the specified port.
+
+4. **[TBA] Docker Deployment:**
    - Build the Docker image:
      ```bash
      docker build -t equityfusion .
